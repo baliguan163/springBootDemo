@@ -72,7 +72,7 @@ public class UserController {
 	}
 	
 	
-	//整合Mybatis
+	//整合Mybatis操作
 	@RequestMapping("ssm")
 	public List<User> findAll(){
 	  List<User> list = userService.findAll();
