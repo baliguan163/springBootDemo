@@ -23,6 +23,15 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    mail:
+        protocol: smtp #smtp是邮件发送协议，pop3和imap是邮件接收协议。因为我们要发送邮件，因此是smtp
+        host: smtp.126.com #邮件发送服务器的主机，这里采用的是126邮箱来发送邮件
+        port: 25 #邮件发送服务器的端口
+        auth: true #一般情况下，发送邮件都是要进行验证
+        username: nangou2006@126.com #邮件发送服务器的用户名
+        password: Baliguan#88 #密码
+
+
 
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
 mybatis:
