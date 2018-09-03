@@ -19,6 +19,13 @@ INSERT t_user VALUES (8 ,'008','123456','18569844528');
 INSERT t_user VALUES (9 ,'009','123456','18569844529');
 
 //get post
+http://localhost:8099/user/add
+private Integer userId;
+private String userName;
+private String password;
+private String phone;
+
+//get post
 http://localhost:8099/user/all
 //get post
 http://localhost:8099/user/all/2/3
