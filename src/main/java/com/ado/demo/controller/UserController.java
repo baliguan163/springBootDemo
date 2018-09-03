@@ -38,7 +38,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/select/{id}", produces = {"application/json;charset=UTF-8"})
 	public Object selectByPrimaryKey(@PathVariable("id") int id){
-
 		return userService.selectByPrimaryKey(id);
 	}
 
