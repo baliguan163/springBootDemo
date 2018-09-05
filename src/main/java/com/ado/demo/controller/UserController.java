@@ -1,45 +1,65 @@
 package com.ado.demo.controller;
 
+import com.ado.demo.entity.Blog;
+import com.ado.demo.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.List;
 
-import com.ado.demo.model.User;
-import com.ado.demo.service.UserService;
-
-
+/**
+ * 后台主页
+ */
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/admin")
 public class UserController {
+//	@Autowired
+//	private UserService userService;
+    @Autowired
+	private BlogService blogService;
+    /**
+     * 后台主页
+     */
+    @RequestMapping("")
+    public String admin(Model model) {
+        List<Blog> articles = blogService.findAllBlog();
+        model.addAttribute("articles", articles);
+        return "admin/index";
+    }
 
-	@Autowired
-	private UserService userService;
-
-	@ResponseBody
-	@RequestMapping(value = "/add", produces = {"application/json;charset=UTF-8"})
-	public int addUser(User user){
-		return userService.addUser(user);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
-	public Object findUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
-		return userService.findUser(pageNum,pageSize);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/all", produces = {"application/json;charset=UTF-8"})
-	public Object findAllUser(){
-		return userService.findAllUser();
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/select/{id}", produces = {"application/json;charset=UTF-8"})
-	public Object selectByPrimaryKey(@PathVariable("id") int id){
-		return userService.selectByPrimaryKey(id);
-	}
+//    /**
+//     * 登录模块
+//     * @return
+//     */
+//    @RequestMapping("/login")
+//    public String login(){
+//        return "admin/login";
+//    }
+//
+//	@ResponseBody
+//	@RequestMapping(value = "/add", produces = {"application/json;charset=UTF-8"})
+//	public int addUser(User user){
+//	    return userService.addUser(user);
+//	}
+//
+//	@ResponseBody
+//	@RequestMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
+//	public Object findUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
+//		return userService.findUser(pageNum,pageSize);
+//	}
+//
+//	@ResponseBody
+//	@RequestMapping(value = "/all", produces = {"application/json;charset=UTF-8"})
+//	public Object findAllUser(){
+//		return userService.findAllUser();
+//	}
+//
+//	@ResponseBody
+//	@RequestMapping(value = "/select/{id}", produces = {"application/json;charset=UTF-8"})
+//	public Object selectByPrimaryKey(@PathVariable("id") int id){
+//		return userService.selectByPrimaryKey(id);
+//	}
 
 }
 

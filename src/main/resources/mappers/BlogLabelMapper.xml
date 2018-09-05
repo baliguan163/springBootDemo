@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ado.demo.dao.BlogLabelMapper">
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.BlogLabel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="label_id" jdbcType="INTEGER" property="labelId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, blog_id, label_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_label
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_label
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.BlogLabel">
+    insert into blog_label (id, blog_id, label_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.BlogLabel">
+    insert into blog_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="labelId != null">
+        label_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null">
+        #{labelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.BlogLabel">
+    update blog_label
+    <set>
+      <if test="blogId != null">
+        blog_id = #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null">
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.BlogLabel">
+    update blog_label
+    set blog_id = #{blogId,jdbcType=INTEGER},
+      label_id = #{labelId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.BlogLabel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="label_id" jdbcType="INTEGER" property="labelId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, blog_id, label_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_label
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_label
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.BlogLabel">
+    insert into blog_label (id, blog_id, label_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.BlogLabel">
+    insert into blog_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="labelId != null">
+        label_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null">
+        #{labelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.BlogLabel">
+    update blog_label
+    <set>
+      <if test="blogId != null">
+        blog_id = #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null">
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.BlogLabel">
+    update blog_label
+    set blog_id = #{blogId,jdbcType=INTEGER},
+      label_id = #{labelId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

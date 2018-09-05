@@ -20,6 +20,7 @@ Archives/按月归档
 创建aricle表用于存储文章信息，创建tag表用于存储标签信息，创建article_tag表用于存储文章标签关系信息，
 创建comment评论表用于存储文章评论信息。
 table	describe
+
 user	用户信息表
 ticket	登录信息表
 aricle	文章表

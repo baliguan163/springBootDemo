@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ado.demo.dao.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_visit" jdbcType="INTEGER" property="blogVisit" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="blog_date" jdbcType="DATE" property="blogDate" />
+    <result column="blog_pv" jdbcType="INTEGER" property="blogPv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ado.demo.entity.Blog">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, blog_visit, user_id, blog_date, blog_pv
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+    <select id="findAllBlog" resultMap="BaseResultMap" resultType="com.ado.demo.entity.Blog">
+        select * from blog
+    </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.Blog">
+    insert into blog (blog_id, blog_title, blog_visit, 
+      user_id, blog_date, blog_pv, 
+      blog_text)
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogVisit,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{blogDate,jdbcType=DATE}, #{blogPv,jdbcType=INTEGER}, 
+      #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogVisit != null">
+        blog_visit,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="blogDate != null">
+        blog_date,
+      </if>
+      <if test="blogPv != null">
+        blog_pv,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        blog_visit = #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        blog_date = #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        blog_pv = #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_visit" jdbcType="INTEGER" property="blogVisit" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="blog_date" jdbcType="DATE" property="blogDate" />
+    <result column="blog_pv" jdbcType="INTEGER" property="blogPv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ado.demo.entity.Blog">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, blog_visit, user_id, blog_date, blog_pv
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.Blog">
+    insert into blog (blog_id, blog_title, blog_visit, 
+      user_id, blog_date, blog_pv, 
+      blog_text)
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogVisit,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{blogDate,jdbcType=DATE}, #{blogPv,jdbcType=INTEGER}, 
+      #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogVisit != null">
+        blog_visit,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="blogDate != null">
+        blog_date,
+      </if>
+      <if test="blogPv != null">
+        blog_pv,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        blog_visit = #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        blog_date = #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        blog_pv = #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_visit" jdbcType="INTEGER" property="blogVisit" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="blog_date" jdbcType="DATE" property="blogDate" />
+    <result column="blog_pv" jdbcType="INTEGER" property="blogPv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ado.demo.entity.Blog">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, blog_visit, user_id, blog_date, blog_pv
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.Blog">
+    insert into blog (blog_id, blog_title, blog_visit, 
+      user_id, blog_date, blog_pv, 
+      blog_text)
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogVisit,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{blogDate,jdbcType=DATE}, #{blogPv,jdbcType=INTEGER}, 
+      #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogVisit != null">
+        blog_visit,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="blogDate != null">
+        blog_date,
+      </if>
+      <if test="blogPv != null">
+        blog_pv,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        blog_visit = #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        blog_date = #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        blog_pv = #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_visit" jdbcType="INTEGER" property="blogVisit" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="blog_date" jdbcType="DATE" property="blogDate" />
+    <result column="blog_pv" jdbcType="INTEGER" property="blogPv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ado.demo.entity.blog">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, blog_visit, user_id, blog_date, blog_pv
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.blog">
+    insert into blog (blog_id, blog_title, blog_visit, 
+      user_id, blog_date, blog_pv, 
+      blog_text)
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogVisit,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{blogDate,jdbcType=DATE}, #{blogPv,jdbcType=INTEGER}, 
+      #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogVisit != null">
+        blog_visit,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="blogDate != null">
+        blog_date,
+      </if>
+      <if test="blogPv != null">
+        blog_pv,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.blog">
+    update blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        blog_visit = #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        blog_date = #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        blog_pv = #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_visit" jdbcType="INTEGER" property="blogVisit" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="blog_date" jdbcType="DATE" property="blogDate" />
+    <result column="blog_pv" jdbcType="INTEGER" property="blogPv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ado.demo.entity.Blog">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, blog_visit, user_id, blog_date, blog_pv
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.Blog">
+    insert into blog (blog_id, blog_title, blog_visit, 
+      user_id, blog_date, blog_pv, 
+      blog_text)
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogVisit,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{blogDate,jdbcType=DATE}, #{blogPv,jdbcType=INTEGER}, 
+      #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogVisit != null">
+        blog_visit,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="blogDate != null">
+        blog_date,
+      </if>
+      <if test="blogPv != null">
+        blog_pv,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogVisit != null">
+        blog_visit = #{blogVisit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null">
+        blog_date = #{blogDate,jdbcType=DATE},
+      </if>
+      <if test="blogPv != null">
+        blog_pv = #{blogPv,jdbcType=INTEGER},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.Blog">
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_visit = #{blogVisit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=DATE},
+      blog_pv = #{blogPv,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+</mapper>

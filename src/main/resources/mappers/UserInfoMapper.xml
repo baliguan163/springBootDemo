@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ado.demo.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ado.demo.entity.UserInfo" >
+    <id column="userinfo_id" property="userinfoId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_sex" property="userSex" jdbcType="BIT" />
+    <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+    <result column="user_job" property="userJob" jdbcType="VARCHAR" />
+    <result column="user_post" property="userPost" jdbcType="VARCHAR" />
+    <result column="user_place" property="userPlace" jdbcType="INTEGER" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+    <result column="user_recent_login_time" property="userRecentLoginTime" jdbcType="TIMESTAMP" />
+    <result column="user_PV" property="userPv" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ado.demo.entity.UserInfo" extends="BaseResultMap" >
+    <result column="user_introduction" property="userIntroduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userinfo_id, user_id, user_name, user_sex, user_birthday, user_job, user_post, user_place, 
+    user_image, user_recent_login_time, user_PV
+  </sql>
+  <sql id="Blob_Column_List" >
+    user_introduction
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from userinfo
+    where userinfo_id = #{userinfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from userinfo
+    where userinfo_id = #{userinfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ado.demo.entity.UserInfo" >
+    insert into userinfo (userinfo_id, user_id, user_name, 
+      user_sex, user_birthday, user_job, 
+      user_post, user_place, user_image, 
+      user_recent_login_time, user_PV, user_introduction
+      )
+    values (#{userinfoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=BIT}, #{userBirthday,jdbcType=DATE}, #{userJob,jdbcType=VARCHAR}, 
+      #{userPost,jdbcType=VARCHAR}, #{userPlace,jdbcType=INTEGER}, #{userImage,jdbcType=VARCHAR}, 
+      #{userRecentLoginTime,jdbcType=TIMESTAMP}, #{userPv,jdbcType=INTEGER}, #{userIntroduction,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ado.demo.entity.UserInfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userinfoId != null" >
+        userinfo_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday,
+      </if>
+      <if test="userJob != null" >
+        user_job,
+      </if>
+      <if test="userPost != null" >
+        user_post,
+      </if>
+      <if test="userPlace != null" >
+        user_place,
+      </if>
+      <if test="userImage != null" >
+        user_image,
+      </if>
+      <if test="userRecentLoginTime != null" >
+        user_recent_login_time,
+      </if>
+      <if test="userPv != null" >
+        user_PV,
+      </if>
+      <if test="userIntroduction != null" >
+        user_introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userinfoId != null" >
+        #{userinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userJob != null" >
+        #{userJob,jdbcType=VARCHAR},
+      </if>
+      <if test="userPost != null" >
+        #{userPost,jdbcType=VARCHAR},
+      </if>
+      <if test="userPlace != null" >
+        #{userPlace,jdbcType=INTEGER},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userRecentLoginTime != null" >
+        #{userRecentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPv != null" >
+        #{userPv,jdbcType=INTEGER},
+      </if>
+      <if test="userIntroduction != null" >
+        #{userIntroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ado.demo.entity.UserInfo" >
+    update userinfo
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday = #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userJob != null" >
+        user_job = #{userJob,jdbcType=VARCHAR},
+      </if>
+      <if test="userPost != null" >
+        user_post = #{userPost,jdbcType=VARCHAR},
+      </if>
+      <if test="userPlace != null" >
+        user_place = #{userPlace,jdbcType=INTEGER},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userRecentLoginTime != null" >
+        user_recent_login_time = #{userRecentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPv != null" >
+        user_PV = #{userPv,jdbcType=INTEGER},
+      </if>
+      <if test="userIntroduction != null" >
+        user_introduction = #{userIntroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where userinfo_id = #{userinfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ado.demo.entity.UserInfo" >
+    update userinfo
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=BIT},
+      user_birthday = #{userBirthday,jdbcType=DATE},
+      user_job = #{userJob,jdbcType=VARCHAR},
+      user_post = #{userPost,jdbcType=VARCHAR},
+      user_place = #{userPlace,jdbcType=INTEGER},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      user_recent_login_time = #{userRecentLoginTime,jdbcType=TIMESTAMP},
+      user_PV = #{userPv,jdbcType=INTEGER},
+      user_introduction = #{userIntroduction,jdbcType=LONGVARCHAR}
+    where userinfo_id = #{userinfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ado.demo.entity.UserInfo" >
+    update userinfo
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=BIT},
+      user_birthday = #{userBirthday,jdbcType=DATE},
+      user_job = #{userJob,jdbcType=VARCHAR},
+      user_post = #{userPost,jdbcType=VARCHAR},
+      user_place = #{userPlace,jdbcType=INTEGER},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      user_recent_login_time = #{userRecentLoginTime,jdbcType=TIMESTAMP},
+      user_PV = #{userPv,jdbcType=INTEGER}
+    where userinfo_id = #{userinfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
